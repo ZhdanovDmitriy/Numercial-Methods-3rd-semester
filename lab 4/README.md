@@ -1,0 +1,1 @@
+Implementation of the conjugate gradient method for solving systems of linear algebraic equations. Investigation of the convergence of the method and its dependence on the choice of the initial approximation.
