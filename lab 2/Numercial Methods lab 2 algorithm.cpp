@@ -5,10 +5,10 @@
 #include <chrono>
 #include <random>
 #include <cmath>
-#include <iomanip>  // для std::setprecision
+#include <iomanip>  // Г¤Г«Гї std::setprecision
 
 using namespace std;
-std::string basePath = "C:/Users/dzhda/OneDrive/Рабочий стол/политех/матлаб/";
+std::string basePath = "C:/Users/dzhda/OneDrive/ГђГ ГЎГ®Г·ГЁГ© Г±ГІГ®Г«/ГЇГ®Г«ГЁГІГҐГµ/Г¬Г ГІГ«Г ГЎ/";
 int cnt = 15;
 int cnt2 = 200;
 int cnt3 = 100;
@@ -53,7 +53,7 @@ bool LU_Decomposition(const vector<vector<long double>>& A, vector<vector<long d
                     sum += (L[k][j] * U[j][i]);
                 }
                 if (U[i][i] == 0) {
-                    cerr << "Ошибка: матрица не может быть разложена на LU (деление на ноль)." << endl;
+                    cerr << "ГЋГёГЁГЎГЄГ : Г¬Г ГІГ°ГЁГ¶Г  Г­ГҐ Г¬Г®Г¦ГҐГІ ГЎГ»ГІГј Г°Г Г§Г«Г®Г¦ГҐГ­Г  Г­Г  LU (Г¤ГҐГ«ГҐГ­ГЁГҐ Г­Г  Г­Г®Г«Гј)." << endl;
                     return false;
                 }
                 L[k][i] = (A[k][i] - sum) / U[i][i];
@@ -63,7 +63,7 @@ bool LU_Decomposition(const vector<vector<long double>>& A, vector<vector<long d
     return true;
 }
 
-// Функция прямой подстановки для решения системы Ly = b
+// Г”ГіГ­ГЄГ¶ГЁГї ГЇГ°ГїГ¬Г®Г© ГЇГ®Г¤Г±ГІГ Г­Г®ГўГЄГЁ Г¤Г«Гї Г°ГҐГёГҐГ­ГЁГї Г±ГЁГ±ГІГҐГ¬Г» Ly = b
 vector<long double> forwardSubstitution(const vector<vector<long double>>& L, const vector<long double>& b) {
     int n = L.size();
     vector<long double> y(n, 0);
@@ -79,7 +79,7 @@ vector<long double> forwardSubstitution(const vector<vector<long double>>& L, co
     return y;
 }
 
-// Функция обратной подстановки для решения системы Ux = y
+// Г”ГіГ­ГЄГ¶ГЁГї Г®ГЎГ°Г ГІГ­Г®Г© ГЇГ®Г¤Г±ГІГ Г­Г®ГўГЄГЁ Г¤Г«Гї Г°ГҐГёГҐГ­ГЁГї Г±ГЁГ±ГІГҐГ¬Г» Ux = y
 vector<long double> backSubstitution(const vector<vector<long double>>& U, const vector<long double>& y) {
     int n = U.size();
     vector<long double> x(n, 0);
@@ -95,12 +95,12 @@ vector<long double> backSubstitution(const vector<vector<long double>>& U, const
     return x;
 }
 
-// Основная функция для решения СЛАУ Ax = b с использованием LU-разложения
+// ГЋГ±Г­Г®ГўГ­Г Гї ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г°ГҐГёГҐГ­ГЁГї Г‘Г‹ГЂГ“ Ax = b Г± ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГҐГ¬ LU-Г°Г Г§Г«Г®Г¦ГҐГ­ГЁГї
 vector<long double> solveLU(const vector<vector<long double>>& A, const vector<long double>& b) {
     int n = A.size();
     vector<vector<long double>> L, U;
     if (!LU_Decomposition(A, L, U)) {
-        cerr << "Ошибка при выполнении LU-разложения." << endl;
+        cerr << "ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГЁ LU-Г°Г Г§Г«Г®Г¦ГҐГ­ГЁГї." << endl;
         return {};
     }
     vector<long double> y = forwardSubstitution(L, b);
@@ -124,10 +124,10 @@ vector<long double> multiplyMatrixVector(const vector<vector<long double>>& A, c
 vector<long double> computeResidual(const vector<vector<long double>>& A, const vector<long double>& x, const vector<long double>& b) {
     int n = A.size();
 
-    // Вычисляем Ax
+    // Г‚Г»Г·ГЁГ±Г«ГїГҐГ¬ Ax
     vector<long double> Ax = multiplyMatrixVector(A, x);
 
-    //Вычисляем r = Ax - b
+    //Г‚Г»Г·ГЁГ±Г«ГїГҐГ¬ r = Ax - b
     vector<long double> r(n, 0);
     for (int i = 0; i < n; i++) {
         r[i] = Ax[i] - b[i];
@@ -208,32 +208,32 @@ bool readDataFromFileSolveWriteToFile(const std::string& filename, const std::st
     int n;
     string line;
     file >> n;
-    // Пропускаем строку заголовка "Matrix A:"
-    getline(file, line); // для завершения строки после n
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Matrix A:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ n
     getline(file, line);
-    // Инициализируем матрицу A
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ Г¬Г ГІГ°ГЁГ¶Гі A
     A.resize(n, std::vector<long double>(n));
-    // Считываем матрицу A
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г¬Г ГІГ°ГЁГ¶Гі A
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             file >> A[i][j];
         }
     }
-    // Пропускаем строку заголовка "Vector b:"
-    getline(file, line); // для завершения строки после матрицы
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Vector b:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ Г¬Г ГІГ°ГЁГ¶Г»
     getline(file, line);
-    // Инициализируем вектор b
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГҐГЄГІГ®Г° b
     b.resize(n);
-    // Считываем вектор b
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ ГўГҐГЄГІГ®Г° b
     for (int i = 0; i < n; ++i) {
         file >> b[i];
     }
-    // Пропускаем строку заголовка "Solution x:"
-    getline(file, line); // для завершения строки после вектора b
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Solution x:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ ГўГҐГЄГІГ®Г°Г  b
     getline(file, line);
-    // Инициализируем вектор x
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГҐГЄГІГ®Г° x
     ans.resize(n);
-    // Считываем решение x
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г°ГҐГёГҐГ­ГЁГҐ x
     for (int i = 0; i < n; ++i) {
         file >> ans[i];
     }
@@ -267,32 +267,32 @@ bool readDataFromFileSolveWriteTimeToFile(const std::string& filename, const std
     int n;
     string line;
     file >> n;
-    // Пропускаем строку заголовка "Matrix A:"
-    getline(file, line); // для завершения строки после n
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Matrix A:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ n
     getline(file, line);
-    // Инициализируем матрицу A
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ Г¬Г ГІГ°ГЁГ¶Гі A
     A.resize(n, std::vector<long double>(n));
-    // Считываем матрицу A
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г¬Г ГІГ°ГЁГ¶Гі A
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             file >> A[i][j];
         }
     }
-    // Пропускаем строку заголовка "Vector b:"
-    getline(file, line); // для завершения строки после матрицы
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Vector b:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ Г¬Г ГІГ°ГЁГ¶Г»
     getline(file, line);
-    // Инициализируем вектор b
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГҐГЄГІГ®Г° b
     b.resize(n);
-    // Считываем вектор b
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ ГўГҐГЄГІГ®Г° b
     for (int i = 0; i < n; ++i) {
         file >> b[i];
     }
-    // Пропускаем строку заголовка "Solution x:"
-    getline(file, line); // для завершения строки после вектора b
+    // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г§Г ГЈГ®Г«Г®ГўГЄГ  "Solution x:"
+    getline(file, line); // Г¤Г«Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЇГ®Г±Г«ГҐ ГўГҐГЄГІГ®Г°Г  b
     getline(file, line);
-    // Инициализируем вектор x
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГҐГЄГІГ®Г° x
     ans.resize(n);
-    // Считываем решение x
+    // Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г°ГҐГёГҐГ­ГЁГҐ x
     for (int i = 0; i < n; ++i) {
         file >> ans[i];
     }
@@ -390,121 +390,3 @@ int main() {
  
     return 0;
 }
-
-
-
-
-
-
-/*
-bool calculatingNoiseEffect(const std::string& filename, const std::string& filename2, long double noise) {
-    ifstream file(filename);
-    ofstream file2(filename2);
-    if (!file.is_open()) {
-        cerr << "Opening error: " << filename << std::endl;
-        return false;
-    }
-    if (!file2.is_open()) {
-        cerr << "Opening error: " << filename2 << std::endl;
-        return false;
-    }
-
-    vector<vector<long double>> A;
-    vector<vector<long double>> A_;
-    vector<long double> b;
-    vector<long double> ans;
-    int n;
-    string line;
-
-    // Чтение размера матрицы
-    file >> n;
-    getline(file, line);
-    getline(file, line);
-
-    // Чтение матрицы A
-    A.resize(n, vector<long double>(n));
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            file >> A[i][j];
-        }
-    }
-
-    // Копия A для внесения шума
-    A_ = A;
-
-    // Чтение вектора b
-    getline(file, line);
-    getline(file, line);
-    b.resize(n);
-    for (int i = 0; i < n; ++i) {
-        file >> b[i];
-    }
-
-    // Чтение правильного ответа
-    getline(file, line);
-    getline(file, line);
-    ans.resize(n);
-    for (int i = 0; i < n; ++i) {
-        file >> ans[i];
-    }
-
-    // Печать исходного уравнения
-    std::cout << "Matrix A:" << std::endl;
-    for (const auto& row : A) {
-        for (const auto& val : row) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "Vector b: ";
-    for (const auto& val : b) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "Correct solution (ans): ";
-    for (const auto& val : ans) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-
-    // Генерация случайного шума
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(1 - noise, 1 + noise);
-
-    for (int iter = 0; iter != N; iter++) {
-        // Решение системы с текущей матрицей A
-        vector<long double> x = solveLU(A, b);
-
-        // Печать промежуточных решений
-        std::cout << "Iteration " << iter + 1 << ": Solution vector x: ";
-        for (const auto& val : x) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-
-        // Рассчет относительных ошибок
-        long double aboutX = (norm(delta(x, ans)) / norm(ans));
-        long double aboutA = (norm(delta(A, A_)) / norm(A));
-        file2 << aboutX << " " << aboutA << std::endl;
-
-        // Печать относительных ошибок
-        std::cout << "Relative error in x (||delta(x)|| / ||x||): " << aboutX << std::endl;
-        std::cout << "Relative error in A (||delta(A)|| / ||A||): " << aboutA << std::endl;
-
-        // Применение шума к матрице A
-        std::cout << "Matrix A with noise:" << std::endl;
-        for (int i = 0; i < A.size(); i++) {
-            for (int j = 0; j < A[0].size(); j++) {
-                A[i][j] = A_[i][j] * dis(gen);
-                std::cout << A[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
-
-    file.close();
-    file2.close();
-    return true;
-}
-*/
