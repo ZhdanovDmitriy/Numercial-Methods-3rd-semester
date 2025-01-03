@@ -1,0 +1,1 @@
+Implementation of the reverse iteration method for finding the eigenvalues of a matrix. Search for 7 eigenvalues and the corresponding eigenvector. Investigation of the dependence of the convergence rate of the inverse iteration method on the separability of eigenvalues. The study of achieving a given accuracy for this method.
