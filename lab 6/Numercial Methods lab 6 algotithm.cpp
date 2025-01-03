@@ -4,10 +4,10 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <iomanip> // Для std::setprecision
+#include <iomanip> // Г„Г«Гї std::setprecision
 
 using namespace std;
-const std::string basePath = "C:/Users/dzhda/OneDrive/Рабочий стол/политех/Численные методы/3 сем/lab 4/Numercial Methods lab 6 matrix generation/Numercial Methods lab 6 matrix generation/matrices_output_modified/";
+const std::string basePath = "C:/Users/dzhda/OneDrive/ГђГ ГЎГ®Г·ГЁГ© Г±ГІГ®Г«/ГЇГ®Г«ГЁГІГҐГµ/Г—ГЁГ±Г«ГҐГ­Г­Г»ГҐ Г¬ГҐГІГ®Г¤Г»/3 Г±ГҐГ¬/lab 4/Numercial Methods lab 6 matrix generation/Numercial Methods lab 6 matrix generation/matrices_output_modified/";
 long double Eps = 0.0000000001;
 int maxIterations = 100;
 
@@ -55,7 +55,7 @@ MatrixData readMatrixFile(const std::string& filename) {
         }
 
         if (line.find("Eigenvalues:") != std::string::npos) {
-            // Чтение собственных значений
+            // Г—ГІГҐГ­ГЁГҐ Г±Г®ГЎГ±ГІГўГҐГ­Г­Г»Гµ Г§Г­Г Г·ГҐГ­ГЁГ©
             while (std::getline(file, line) && !line.empty()) {
                 data.eigenvalues.push_back(std::stold(line));
             }
@@ -68,10 +68,10 @@ void chekFile(const std::string& filename) {
     try {
         MatrixData data = readMatrixFile(filename);
 
-        // Установка фиксированного формата вывода и точности
+        // Г“Г±ГІГ Г­Г®ГўГЄГ  ГґГЁГЄГ±ГЁГ°Г®ГўГ Г­Г­Г®ГЈГ® ГґГ®Г°Г¬Г ГІГ  ГўГ»ГўГ®Г¤Г  ГЁ ГІГ®Г·Г­Г®Г±ГІГЁ
         std::cout << std::fixed << std::setprecision(6);
 
-        // Вывод данных
+        // Г‚Г»ГўГ®Г¤ Г¤Г Г­Г­Г»Гµ
         std::cout << "Matrix Index: " << data.matrixIndex << std::endl;
         std::cout << "Gap between 4-th and 5-th: " << data.otdNumber << std::endl;
 
@@ -225,7 +225,7 @@ bool LU_Decomposition(const vector<vector<long double>>& A, vector<vector<long d
                     sum += (L[k][j] * U[j][i]);
                 }
                 if (U[i][i] == 0) {
-                    cerr << "Ошибка: матрица не может быть разложена на LU (деление на ноль)." << endl;
+                    cerr << "ГЋГёГЁГЎГЄГ : Г¬Г ГІГ°ГЁГ¶Г  Г­ГҐ Г¬Г®Г¦ГҐГІ ГЎГ»ГІГј Г°Г Г§Г«Г®Г¦ГҐГ­Г  Г­Г  LU (Г¤ГҐГ«ГҐГ­ГЁГҐ Г­Г  Г­Г®Г«Гј)." << endl;
                     return false;
                 }
                 L[k][i] = (A[k][i] - sum) / U[i][i];
